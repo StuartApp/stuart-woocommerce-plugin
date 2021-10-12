@@ -1,0 +1,938 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Stuart Delivery For WooCommerce\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-19 17:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.3.1; wp-5.3.2"
+
+#: class-stuart-shipping-method.php:165
+msgid "0.00 to disable"
+msgstr ""
+
+#: class-stuart-shipping-method.php:151
+msgid "0.00 to disable, also applied as percentage threshold if selected above"
+msgstr ""
+
+#: class-stuart-shipping-method.php:158
+msgid ""
+"0.00 to disabled=, also applied as percentage threshold if selected above"
+msgstr ""
+
+#: class-stuart-shipping-method.php:578
+msgid "3 weeks by default. Cannot be shorter than 1."
+msgstr ""
+
+#: class-stuart-shipping-method.php:471
+msgid "Action to auto create Stuart Delivery"
+msgstr ""
+
+#: class-stuart-shipping-method.php:138
+msgid "Add multiple of cart price from Stuart quote"
+msgstr ""
+
+#: class-stuart-shipping-method.php:135
+msgid "Add percentage after a certain cart price"
+msgstr ""
+
+#: class-stuart-shipping-method.php:131
+msgid "Add the fee above from Stuart quote"
+msgstr ""
+
+#: class-stuart-shipping-method.php:144
+msgid ""
+"Add/remove 0.00 of your currency, value is a percentage if selected on price "
+"type above, add 10.00 for 10%."
+msgstr ""
+
+#. Description of the plugin
+msgid "Adding Stuart Delivery to WooCommerce Delivery Methods"
+msgstr ""
+
+#: class-stuart-shipping-method.php:177
+msgid "Address 2 of your store"
+msgstr ""
+
+#: stuart.php:1629
+msgid "Address is in delivery/pickup zone."
+msgstr ""
+
+#: stuart.php:1636
+msgid "Address not in Stuart delivery/pickup zone."
+msgstr ""
+
+#: stuart.php:1530
+msgid "Address not in zone or cart empty."
+msgstr ""
+
+#: class-stuart-shipping-method.php:170
+msgid "Address of your store"
+msgstr ""
+
+#: class-stuart-shipping-method.php:769
+msgid "Advanced configuration"
+msgstr ""
+
+#: class-stuart-shipping-method.php:640
+msgid "After shipping rate"
+msgstr ""
+
+#: class-stuart-shipping-method.php:398
+msgid "Allow Dokan vendor to configure and use Stuart ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:382
+msgid "Allow YITH Multivendor to configure and use Stuart ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:295
+#, php-format
+msgid "Are you working on %s"
+msgstr ""
+
+#: templates/after_shipping.php:34
+msgid "at"
+msgstr ""
+
+#: class-stuart-shipping-method.php:307
+#, php-format
+msgid "At what time do you start on %s ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:325
+#, php-format
+msgid "At what time do you start your pause on %s ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:316
+#, php-format
+msgid "At what time do you stop on %s ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:334
+#, php-format
+msgid "At what time do you stop your pause on %s ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:599
+msgid "Avoid before closing orders. Leave 00:00 to disable."
+msgstr ""
+
+#: class-stuart-shipping-method.php:607
+msgid ""
+"Avoid before opening orders, replace current day start hour. Leave 00:00 to "
+"disable."
+msgstr ""
+
+#: class-stuart-shipping-method.php:615
+msgid ""
+"Avoid late deliveries orders, replace current day stop hour. Leave 00:00 to "
+"disable."
+msgstr ""
+
+#: class-stuart-shipping-method.php:767
+msgid "Basic settings"
+msgstr ""
+
+#: class-stuart-shipping-method.php:487
+msgid "Bike"
+msgstr ""
+
+#: stuart.php:1390
+msgid "Cancel it now"
+msgstr ""
+
+#: stuart.php:1383
+msgid "Cancel or change delivery"
+msgstr ""
+
+#: class-stuart-shipping-method.php:551
+msgid "Cancel Stuart Delivery on order cancelation"
+msgstr ""
+
+#: class-stuart-shipping-method.php:563
+msgid "Cancel Stuart Delivery on order refunded"
+msgstr ""
+
+#: class-stuart-shipping-method.php:492
+msgid "Car"
+msgstr ""
+
+#: class-stuart-shipping-method.php:490
+msgid "Cargo Bike"
+msgstr ""
+
+#: class-stuart-shipping-method.php:491
+msgid "Cargo Bike XL"
+msgstr ""
+
+#: class-stuart-shipping-method.php:422
+msgid ""
+"Check to use WooCommerce Pickup Plus plugin to allow multiple pickup "
+"locations. Will override this modules pickup location only, not hours and "
+"delivery scheduling."
+msgstr ""
+
+#: class-stuart-shipping-method.php:651
+msgid "Checkout before Order review"
+msgstr ""
+
+#: class-stuart-shipping-method.php:477 class-stuart-shipping-method.php:508
+msgid "Choose action to create Stuart Delivery"
+msgstr ""
+
+#: stuart.php:1150
+msgid "click here"
+msgstr ""
+
+#: stuart.php:1398
+msgid "Click here to follow delivery."
+msgstr ""
+
+#: templates/yith-vendor.php:87
+msgid "Confirm"
+msgstr ""
+
+#: templates/yith-vendor.php:90
+#, php-format
+msgid "Current %s : %s"
+msgstr ""
+
+#: class-stuart-shipping-method.php:699
+msgid "Debug logs"
+msgstr ""
+
+#: templates/after_shipping.php:22
+msgid "Delivery"
+msgstr ""
+
+#: stuart.php:1272
+msgid "Delivery accepted by Stuart and will be assigned to a driver."
+msgstr ""
+
+#: stuart.php:1149 stuart.php:1239
+msgid "Delivery around"
+msgstr ""
+
+#: class-stuart-shipping-method.php:31
+msgid "Delivery by bike on schedule."
+msgstr ""
+
+#: stuart.php:1279
+msgid "Delivery cancelled, you won't be charged."
+msgstr ""
+
+#: stuart.php:1273
+msgid "Delivery has been scheduled. It will start later."
+msgstr ""
+
+#: stuart.php:1280
+msgid ""
+"Delivery has expired. No driver accepted the job. It didn't cost any money."
+msgstr ""
+
+#: class-stuart-shipping-method.php:107
+msgid "Delivery now with Stuart"
+msgstr ""
+
+#: stuart.php:1322
+msgid "Delivery state :"
+msgstr ""
+
+#: class-stuart-shipping-method.php:635
+msgid "Disabled if empty."
+msgstr ""
+
+#: class-stuart-shipping-method.php:438
+msgid "Display a link to courier route on checkout"
+msgstr ""
+
+#: class-stuart-shipping-method.php:444
+msgid ""
+"Display a link to see future courier route (via Google Maps) on frontend "
+"under time selection."
+msgstr ""
+
+#: class-stuart-shipping-method.php:450
+msgid "Display a map of the courier route on checkout"
+msgstr ""
+
+#: class-stuart-shipping-method.php:456
+msgid "Display a small map within an iframe."
+msgstr ""
+
+#: class-stuart-shipping-method.php:632
+msgid "Display a text on checkout if Stuart is not available for this area."
+msgstr ""
+
+#: class-stuart-shipping-method.php:156
+msgid ""
+"Do you accept Stuart deliveries only after a certain amount (cart, tax "
+"included) ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:149
+msgid "Do you offer delivery after some price (tax included) ?"
+msgstr ""
+
+#: stuart.php:1386
+msgid "Do you want to cancel or relaunch the delivery now ?"
+msgstr ""
+
+#: stuart.php:1364
+msgid "Do you want to change pickup location ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:163
+msgid "Do you want to limit price to a maximum ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:371
+msgid ""
+"Do you want to prevent products in a category to be delivered with Stuart ? "
+"Only categories with products are displayed here."
+msgstr ""
+
+#: stuart.php:1486
+msgid "Docs & Support"
+msgstr ""
+
+#: class-stuart-shipping-method.php:583
+msgid ""
+"Does time delay apply at business opening each day or at the moment of order "
+"?"
+msgstr ""
+
+#: stuart.php:1276
+msgid "Driver has accepted the job and started the delivery."
+msgstr ""
+
+#: class-stuart-shipping-method.php:225
+msgid "E-mail of your company/site/person"
+msgstr ""
+
+#: class-stuart-shipping-method.php:127
+msgid "Enable Customer to pay for delivery"
+msgstr ""
+
+#: class-stuart-shipping-method.php:91
+msgid "Enable Stuart Delivery Shipping"
+msgstr ""
+
+#: class-stuart-shipping-method.php:557
+msgid "Enable to cancel Stuart delivery, when order is canceled"
+msgstr ""
+
+#: class-stuart-shipping-method.php:569
+msgid "Enable to cancel Stuart delivery, when order is refunded"
+msgstr ""
+
+#: class-stuart-shipping-method.php:533
+msgid "Enable to start Stuart delivery, when order is on pending"
+msgstr ""
+
+#: class-stuart-shipping-method.php:545
+msgid "Enable to start Stuart delivery, when order is on processing"
+msgstr ""
+
+#: class-stuart-shipping-method.php:85
+msgid "Enable/Disable"
+msgstr ""
+
+#: class-stuart-shipping-method.php:245
+msgid "Filter delivery by postcodes"
+msgstr ""
+
+#: class-stuart-shipping-method.php:204
+msgid "First name of person to pickup products (i.e. your manager)"
+msgstr ""
+
+#: stuart.php:1150
+msgid "Follow Your delivery :"
+msgstr ""
+
+#: stuart.php:1238
+msgid "Follow your order"
+msgstr ""
+
+#: class-stuart-shipping-method.php:495 class-stuart-shipping-method.php:521
+msgid "Force delivery carrier on Stuart Delivery"
+msgstr ""
+
+#: class-stuart-shipping-method.php:484
+msgid "Force delivery mode, only available in France"
+msgstr ""
+
+#: class-stuart-shipping-method.php:513
+msgid "Force delivery package size, use with caution"
+msgstr ""
+
+#: class-stuart-shipping-method.php:659 class-stuart-shipping-method.php:668
+msgid ""
+"Force display on certain hooks on checkout, permit to put frontend "
+"scheduling where you want."
+msgstr ""
+
+#: class-stuart-shipping-method.php:501
+msgid "Force package type below ? available outside france"
+msgstr ""
+
+#: stuart.php:1376
+msgid "Format : dd/mm/yyyy hh:mm"
+msgstr ""
+
+#: class-stuart-shipping-method.php:310 class-stuart-shipping-method.php:319
+#: class-stuart-shipping-method.php:328 class-stuart-shipping-method.php:337
+#: class-stuart-shipping-method.php:599 class-stuart-shipping-method.php:607
+#: class-stuart-shipping-method.php:615
+msgid "Format this in 24H format 23:23 for 11PM 23 minutes"
+msgstr ""
+
+#: class-stuart-shipping-method.php:78
+msgid "Friday"
+msgstr ""
+
+#: class-stuart-shipping-method.php:427
+msgid "Google Maps - Distance Matrix - API Key"
+msgstr ""
+
+#: class-stuart-shipping-method.php:462
+msgid "Google Maps - Embed API - API Key"
+msgstr ""
+
+#: class-stuart-shipping-method.php:345
+msgid "Holidays"
+msgstr ""
+
+#: class-stuart-shipping-method.php:768
+msgid "Hours & days"
+msgstr ""
+
+#. URI of the plugin
+#. Author URI of the plugin
+msgid "https://malttt.com"
+msgstr ""
+
+#: class-stuart-shipping-method.php:590
+msgid ""
+"If not, it will be applied only at time of order, for instance order placed "
+"at night might be delivered at business opening."
+msgstr ""
+
+#: class-stuart-shipping-method.php:680
+msgid ""
+"If your checkout does not refresh properly when you change hour on shipping "
+"options, it might be better to prevent refresh. Hours will still be ok, "
+"however pricing might change slightly in some cases."
+msgstr ""
+
+#: class-stuart-shipping-method.php:348
+msgid "Indicate day and month and separate by coma, for example :"
+msgstr ""
+
+#: class-stuart-shipping-method.php:686
+msgid "Is this a production account ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:707
+msgid ""
+"It will creates more logs and allow you to have a better insight of what is "
+"happening. Logs are encrypted and deleted after one month for security "
+"purpose as they might contain personnal data and be elligible to GDPR rules."
+msgstr ""
+
+#: class-stuart-shipping-method.php:518
+msgid "Large"
+msgstr ""
+
+#: class-stuart-shipping-method.php:211
+msgid "Last name of person to pickup products (i.e. your manager)"
+msgstr ""
+
+#: class-stuart-shipping-method.php:328 class-stuart-shipping-method.php:337
+msgid "Leave 00:00 to disable."
+msgstr ""
+
+#: class-stuart-shipping-method.php:97
+msgid "Licence key"
+msgstr ""
+
+#: class-stuart-shipping-method.php:575
+msgid "Limit days to schedule order"
+msgstr ""
+
+#: stuart.php:1239
+msgid "Link"
+msgstr ""
+
+#: class-stuart-shipping-method.php:770
+msgid "Logs"
+msgstr ""
+
+#. Author of the plugin
+msgid "Malttt"
+msgstr ""
+
+#: class-stuart-shipping-method.php:517
+msgid "Medium"
+msgstr ""
+
+#: class-stuart-shipping-method.php:104
+msgid "Method Title"
+msgstr ""
+
+#: class-stuart-shipping-method.php:74
+msgid "Monday"
+msgstr ""
+
+#: class-stuart-shipping-method.php:488
+msgid "Motor Bike"
+msgstr ""
+
+#: class-stuart-shipping-method.php:489
+msgid "Motor Bike XL"
+msgstr ""
+
+#: class-stuart-shipping-method.php:136
+msgid "Multiple number below price from stuart quote"
+msgstr ""
+
+#: class-stuart-shipping-method.php:218
+msgid "Name of your company"
+msgstr ""
+
+#: class-stuart-shipping-method.php:466
+msgid ""
+"Needed for coursier route on maps on checkout. Do not forget to limit to "
+"your domain only, the API key is public."
+msgstr ""
+
+#: class-stuart-shipping-method.php:431
+msgid ""
+"Needed in order to work with pickup plus, please create API credentials for "
+"Google Maps Distance Matrix API at this address :"
+msgstr ""
+
+#: stuart.php:1388 class-stuart-shipping-method.php:89
+#: class-stuart-shipping-method.php:300 class-stuart-shipping-method.php:360
+#: class-stuart-shipping-method.php:386 class-stuart-shipping-method.php:402
+#: class-stuart-shipping-method.php:418 class-stuart-shipping-method.php:442
+#: class-stuart-shipping-method.php:454 class-stuart-shipping-method.php:505
+#: class-stuart-shipping-method.php:531 class-stuart-shipping-method.php:543
+#: class-stuart-shipping-method.php:555 class-stuart-shipping-method.php:567
+#: class-stuart-shipping-method.php:586 class-stuart-shipping-method.php:624
+#: class-stuart-shipping-method.php:678 class-stuart-shipping-method.php:690
+#: class-stuart-shipping-method.php:703
+msgid "No"
+msgstr ""
+
+#: stuart.php:1584
+msgid ""
+"No address given, cannot pick from your cart and address paramater missing "
+"or empty."
+msgstr ""
+
+#: stuart.php:1325
+msgid "No pickup time set."
+msgstr ""
+
+#: class-stuart-shipping-method.php:179
+msgid "Office number or floor or flat"
+msgstr ""
+
+#: class-stuart-shipping-method.php:626
+msgid "Only apply if same day delivery hours are modified."
+msgstr ""
+
+#: includes/dokan.php:534 includes/yith-multivendor.php:393
+msgid "Order"
+msgstr ""
+
+#: stuart.php:663
+msgid "Order cannot be reschedule."
+msgstr ""
+
+#: includes/dokan.php:189
+msgid "Order delivery cancelled."
+msgstr ""
+
+#: includes/dokan.php:191
+msgid "Order delivery cannot be cancelled."
+msgstr ""
+
+#: includes/dokan.php:176
+msgid "Order delivery cannot be modified."
+msgstr ""
+
+#: includes/dokan.php:174
+msgid "Order delivery modified."
+msgstr ""
+
+#: class-stuart-shipping-method.php:232
+msgid "Phone number of your company/site/person"
+msgstr ""
+
+#: stuart.php:1372
+msgid "Pickup date & time "
+msgstr ""
+
+#: stuart.php:1324
+msgid "Pickup date :"
+msgstr ""
+
+#: class-stuart-shipping-method.php:216
+msgid "Pickup info: company name"
+msgstr ""
+
+#: class-stuart-shipping-method.php:223
+msgid "Pickup info: e-mail"
+msgstr ""
+
+#: class-stuart-shipping-method.php:202
+msgid "Pickup info: first name"
+msgstr ""
+
+#: class-stuart-shipping-method.php:209
+msgid "Pickup info: last name"
+msgstr ""
+
+#: class-stuart-shipping-method.php:230
+msgid "Pickup info: phone number"
+msgstr ""
+
+#: class-stuart-shipping-method.php:237
+msgid "Pickup info: special instructions"
+msgstr ""
+
+#: stuart.php:1361
+msgid "Pickup Location"
+msgstr ""
+
+#: templates/yith-vendor.php:60 templates/dokan-vendor.php:60
+msgid ""
+"Please remember to configure your pickup point at your eshop and configure "
+"precisely all measures (weight, length etc) of your products."
+msgstr ""
+
+#: class-stuart-shipping-method.php:257
+msgid "Prevent courier to come before you can prepare by adding minutes here."
+msgstr ""
+
+#: class-stuart-shipping-method.php:247
+msgid ""
+"Prevent delivery in some unexpected zones by allowing only certain postcodes."
+" Indicate them like this \"123456,1245367,21688\" (separated by comma, no "
+"space). Leave empty to disable."
+msgstr ""
+
+#: class-stuart-shipping-method.php:370
+msgid "Product category excluded from this delivery method"
+msgstr ""
+
+#: class-stuart-shipping-method.php:137
+msgid "Remove multiple of cart price from Stuart quote"
+msgstr ""
+
+#: class-stuart-shipping-method.php:134
+msgid "Remove percentage after a certain cart price"
+msgstr ""
+
+#: class-stuart-shipping-method.php:132
+msgid "Remove the fee above from Stuart quote"
+msgstr ""
+
+#: class-stuart-shipping-method.php:642
+msgid "Review Order, after cart content"
+msgstr ""
+
+#: class-stuart-shipping-method.php:644
+msgid "Review Order, after order total"
+msgstr ""
+
+#: class-stuart-shipping-method.php:646
+msgid "Review Order, after payment"
+msgstr ""
+
+#: class-stuart-shipping-method.php:641
+msgid "Review Order, after shipping"
+msgstr ""
+
+#: class-stuart-shipping-method.php:643
+msgid "Review Order, before order total"
+msgstr ""
+
+#: class-stuart-shipping-method.php:645
+msgid "Review Order, before Payment"
+msgstr ""
+
+#: class-stuart-shipping-method.php:649
+msgid "Review Order, before shipping"
+msgstr ""
+
+#: class-stuart-shipping-method.php:650
+msgid "Review Order, before submit"
+msgstr ""
+
+#: class-stuart-shipping-method.php:647 class-stuart-shipping-method.php:648
+msgid "Review Order, before total"
+msgstr ""
+
+#: class-stuart-shipping-method.php:604
+msgid "Same day delivery starts after :"
+msgstr ""
+
+#: class-stuart-shipping-method.php:612
+msgid "Same day delivery stops after :"
+msgstr ""
+
+#: class-stuart-shipping-method.php:79
+msgid "Saturday"
+msgstr ""
+
+#: stuart.php:1389
+msgid "Schedule with time above"
+msgstr ""
+
+#: templates/after_shipping.php:48
+msgid "See courier route"
+msgstr ""
+
+#: templates/yith-vendor.php:73
+#, php-format
+msgid "Select a %s"
+msgstr ""
+
+#: stuart.php:1484
+msgid "Settings"
+msgstr ""
+
+#: class-stuart-shipping-method.php:516
+msgid "Small"
+msgstr ""
+
+#: class-stuart-shipping-method.php:239
+msgid "Some special instructions for Stuart courier to pickup"
+msgstr ""
+
+#: class-stuart-shipping-method.php:527
+msgid ""
+"Start Stuart Delivery on order pending payment (if paid after delivery for "
+"example)"
+msgstr ""
+
+#: class-stuart-shipping-method.php:539
+msgid "Start Stuart Delivery on order processing (after it is paid)"
+msgstr ""
+
+#: class-stuart-shipping-method.php:596
+msgid "Stop displaying same day order after :"
+msgstr ""
+
+#: class-stuart-shipping-method.php:172
+msgid "Street, building"
+msgstr ""
+
+#: class-stuart-shipping-method.php:111
+msgid "Stuart client API ID"
+msgstr ""
+
+#: class-stuart-shipping-method.php:118
+msgid "Stuart client API Secret"
+msgstr ""
+
+#: class-stuart-shipping-method.php:30 includes/dokan.php:121
+msgid "Stuart Delivery"
+msgstr ""
+
+#. Name of the plugin
+msgid "Stuart Delivery For WooCommerce"
+msgstr ""
+
+#: stuart.php:723
+#, php-format
+msgid ""
+"Stuart Delivery Plugin requires PHP 5.3 or higher and your current PHP "
+"version is %s. Please (contact your host to) update your PHP version."
+msgstr ""
+
+#: stuart.php:1275
+msgid "Stuart found a driver and delivery will begin on time."
+msgstr ""
+
+#: stuart.php:1274
+msgid "Stuart is looking for a driver. It should start soon."
+msgstr ""
+
+#: templates/yith-vendor.php:59 templates/dokan-vendor.php:59
+msgid "Stuart options"
+msgstr ""
+
+#: templates/yith-vendor.php:138 templates/dokan-vendor.php:155
+msgid "Submit"
+msgstr ""
+
+#: class-stuart-shipping-method.php:80
+msgid "Sunday"
+msgstr ""
+
+#: stuart.php:1277
+msgid "The package was delivered successfully."
+msgstr ""
+
+#: stuart.php:1278
+msgid "The package won't be delivered as it was cancelled by the client."
+msgstr ""
+
+#: class-stuart-shipping-method.php:106
+msgid "This controls the title which the user sees during checkout."
+msgstr ""
+
+#: stuart.php:1271
+msgid "This delivery hasn't been sent to Stuart yet."
+msgstr ""
+
+#: class-stuart-shipping-method.php:77
+msgid "Thursday"
+msgstr ""
+
+#: class-stuart-shipping-method.php:75
+msgid "Tuesday"
+msgstr ""
+
+#: class-stuart-shipping-method.php:694
+msgid "Uncheck to use sandbox version"
+msgstr ""
+
+#: class-stuart-shipping-method.php:133
+msgid "Use fixed fee above"
+msgstr ""
+
+#: class-stuart-shipping-method.php:414
+msgid "Use pickup plus plugin ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:493
+msgid "Van"
+msgstr ""
+
+#: includes/dokan.php:534
+msgid "Vendor"
+msgstr ""
+
+#: class-stuart-shipping-method.php:76
+msgid "Wednesday"
+msgstr ""
+
+#: class-stuart-shipping-method.php:254
+msgid "What is the delay to prepare the order ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:142
+msgid "What is the delivery fee added/removed/multiplied from Stuart quote ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:125
+msgid "What is the payment fee type ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:656
+msgid ""
+"Which frontend hook (desktop) does you want to use to display Stuart "
+"delivery scheduling ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:665
+msgid ""
+"Which frontend hook (mobile) does you want to use to display Stuart delivery "
+"scheduling ?"
+msgstr ""
+
+#: class-stuart-shipping-method.php:652
+msgid "WooFunnel before payment"
+msgstr ""
+
+#: class-stuart-shipping-method.php:519
+msgid "X Large"
+msgstr ""
+
+#: class-stuart-shipping-method.php:88 class-stuart-shipping-method.php:299
+#: class-stuart-shipping-method.php:385 class-stuart-shipping-method.php:401
+#: class-stuart-shipping-method.php:417 class-stuart-shipping-method.php:441
+#: class-stuart-shipping-method.php:453 class-stuart-shipping-method.php:504
+#: class-stuart-shipping-method.php:530 class-stuart-shipping-method.php:542
+#: class-stuart-shipping-method.php:554 class-stuart-shipping-method.php:566
+#: class-stuart-shipping-method.php:623 class-stuart-shipping-method.php:677
+#: class-stuart-shipping-method.php:689 class-stuart-shipping-method.php:702
+msgid "Yes"
+msgstr ""
+
+#: class-stuart-shipping-method.php:588
+msgid "Yes, for all business days"
+msgstr ""
+
+#: class-stuart-shipping-method.php:587
+msgid "Yes, only for next business day"
+msgstr ""
+
+#: templates/yith-vendor.php:60 templates/dokan-vendor.php:60
+msgid ""
+"You can use Stuart delivery for your orders using the following options."
+msgstr ""
+
+#: includes/dokan.php:521 includes/yith-multivendor.php:378
+msgid ""
+"You have multiple deliveries for this order, please click on following links "
+"to follow them :"
+msgstr ""
+
+#: stuart.php:619
+msgid ""
+"Your delivery hasn't been sent to Stuart yet, your payment might be pending "
+"approval, this page will keep updating until it begin."
+msgstr ""
+
+#: stuart.php:692
+#, php-format
+msgid "Your order will be delivered around the %s"
+msgstr ""
+
+#: class-stuart-shipping-method.php:190
+msgid "Your store city name"
+msgstr ""
+
+#: class-stuart-shipping-method.php:196
+msgid "Your store country name (in local language)"
+msgstr ""
+
+#: class-stuart-shipping-method.php:184
+msgid "Your store ZIP/Post Code"
+msgstr ""
+
+#: class-stuart-shipping-method.php:3009
+msgid ""
+"Your Stuart Plugin Licence has expired, it will continue to be active but "
+"you cannot request support anymore for this domain or licence."
+msgstr ""
+
+#: class-stuart-shipping-method.php:3001
+msgid "Your Stuart Plugin Licence is :"
+msgstr ""
+
+#: class-stuart-shipping-method.php:3030
+msgid ""
+"Your website cannot connect to the Stuart API. Please verify informations "
+"provided."
+msgstr ""
+
+#: class-stuart-shipping-method.php:2974
+msgid "Your website is connected to the Stuart API and running."
+msgstr ""

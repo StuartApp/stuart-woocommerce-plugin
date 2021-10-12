@@ -1,0 +1,6 @@
+{
+    "require": {
+        "stuartapp/stuart-client-php": "^3.6",
+        "dvdoug/boxpacker": "2.7.2"
+    }
+}

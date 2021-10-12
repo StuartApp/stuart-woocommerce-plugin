@@ -1,0 +1,4 @@
+*.sh
+*.zip
+.DS_Store
+vendor
