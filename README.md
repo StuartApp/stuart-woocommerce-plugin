@@ -1,4 +1,4 @@
-# Stuart WooCommerce Official Plugin
+# Stuart WooCommerce Official Plugin (WIP)
 
 Full documentation with user guides for this plugin can be found [here](https://placeholder.org)
 
