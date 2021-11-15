@@ -24,10 +24,13 @@ interface MainPluginController
     public function newOrder($order_id);
     public function orderStatusPending($order_id);
     public function orderStatusProcessing($order_id);
-    public function saveShippingDetails($order_id);
+    public function updateDeliveryFromTheBO($order_id);
     public function followPickup($data, $render = true);
     public function getPluginActions($actions);
     public function orderStatusCancelled($order_id);
+    // Add pickUpTime input to the order checkout page
+    public function setHiddenFormField($checkout);
+    public function saveCheckoutField($order_id);
     // Backoffice management
     public function orderMetaShipping($order);
     // Custom endpoints
@@ -35,6 +38,4 @@ interface MainPluginController
     // Misc. Utils
     public function getFollowUrl($order_id);
     public function addContentOrderConfirmation($order_id);
-    public function setHiddenFormField($checkout);
-    public function saveCheckoutField($order_id);
 }

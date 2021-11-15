@@ -63,7 +63,6 @@
 		  transform: translateX(26px);
 		}
 
-		/* Rounded sliders */
 		.slider.round {
 		  border-radius: 34px;
 		}
@@ -102,7 +101,7 @@
 	  				<?php esc_html_e('at', 'stuart-delivery'); ?>
 	  			</div>
 				<div style="display: inline;" class="stuart_delivery_time">
-	  				<select name="stuart_time" id="stuart_time"></select>
+	  				<select onchange="setPickUpTime(event)" name="stuart_time" id="stuart_time"></select>
 				</div>
 			</div>
 				
@@ -129,6 +128,7 @@
 						deliverLaterText.style.display = "inline";
 						timeSlots.style.display = "block";
 						setTimeSlots();
+						setPickUpTime();
   					}
 				}
 
@@ -155,10 +155,16 @@
 					const timeSelection = document.querySelector('#stuart_time');
 					timeSelection.innerHTML = '';
     				timeSlots.forEach((timeSlot) => {
-						timeSelection.append(new Option(`${addZero(timeSlot.getHours())}:${addZero(timeSlot.getMinutes())}`));
+						timeSelection.append(new Option(`${addZero(timeSlot.getHours())}:${addZero(timeSlot.getMinutes())}`, timeSlot.getTime()/1000));
 					}) 
 				}
 
+				function setPickUpTime(e){
+					const selectedOption = e ? e.target.options[e.target.selectedIndex].value : document.getElementById('stuart_time').options[0].value; 
+					document.querySelector('#stuart_pickup_time').value = selectedOption;
+				}
+
+				markDeliverNow();
 				document.querySelector('.stuart_schedule').closest('li').prepend(document.querySelector('.stuart_schedule'));
 
 			</script>

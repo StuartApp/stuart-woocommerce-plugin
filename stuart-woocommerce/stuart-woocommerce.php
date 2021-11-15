@@ -135,20 +135,13 @@ class Stuart implements MainPluginController
         add_action('woocommerce_order_status_refunded', array($this, 'orderStatusCancelled'));
         // Backoffice Order Management
         add_action('woocommerce_admin_order_data_after_shipping_address', array($this, 'orderMetaShipping'));
-        add_action('save_post', array($this, 'saveShippingDetails'));
-     
-        // Hook After shipping informations
-        $settings = get_option('woocommerce_stuart_delivery_shipping_method_settings');
-
-        $hook_key = wp_is_mobile() ? 'hook_frontend_mobile' : 'hook_frontend_desktop';
-
-        if (!empty($settings) && isset($settings[$hook_key])) {
-            $hook_frontend = $settings[$hook_key];
-        } else {
-            $hook_frontend = 'woocommerce_review_order_after_shipping';
-        }
-
-        add_action($hook_frontend, array($this, 'reviewOrderAfterShipping'), 10, 0);
+        add_action('save_post', array($this, 'updateDeliveryFromTheBO'));
+        // Cronjob to create jobs in stuart depending on the order lifecycle
+        add_action('stuart_hourly_cron', array($this, 'cronJob'));
+        // Restart all the cron jobs when the server boots
+        add_action('wp', array($this, 'cronActivation'));
+        // Display the Shipping info during order checkout
+        add_action('woocommerce_after_shipping_rate', array($this, 'reviewOrderAfterShipping'), 10, 0);
 
         // Add order confirmation tracking URL
         add_action('woocommerce_thankyou', array($this, 'addContentOrderConfirmation'));
@@ -171,15 +164,15 @@ class Stuart implements MainPluginController
         }
     }
 
-    public function orderPaid($order_id)
+    public function readyToCreateJob($order_id)
     {
         $delivery = $this->initializeCustomDeliveryClass();
         $order = new WC_Order($order_id);
 
         if ($order->has_shipping_method($delivery->id)) {
-            $test = $delivery->getOption('create_delivery', $order) == 'created' && $delivery->getOption('enabled', $order) == 'yes';
+            $test = $delivery->getOption('enabled', $order) == 'yes';
 
-            $delivery->addLog('Order Paid', array('order' => $order_id, 'test' => $test));
+            $delivery->addLog('readyToCreateJob::orderData', array('order' => $order_id, 'test' => $test));
             
             if ($test) {
                 $delivery->createJob($order_id);
@@ -193,10 +186,10 @@ class Stuart implements MainPluginController
         $delivery = $this->initializeCustomDeliveryClass();
         $order = new WC_Order($order_id);
         if ($order->has_shipping_method($delivery->id)) {
-            $test = $delivery->getOption('create_delivery', $order) == 'created' && $delivery->getOption('enabled', $order) == 'yes' && $delivery->getOption('start_delivery_on_order_processing', $order) == 'yes';
-            $delivery->addLog('Order Processing', array('order' => $order_id, 'test' => $test));
+            $test = $delivery->getOption('create_delivery_mode', $order) == 'procesing' && $delivery->getOption('enabled', $order) == 'yes';
+            $delivery->addLog('orderStatusProcessing::orderData', array('order' => $order_id, 'test' => $test));
             if ($test) {
-                $this->orderPaid($order_id);
+                $this->readyToCreateJob($order_id);
             }
         }
     }
@@ -210,7 +203,7 @@ class Stuart implements MainPluginController
         if ($order->has_shipping_method($delivery->id)) {
             $test = $delivery->getOption('cancel_delivery_on_order_cancel', $order) == 'yes' && $delivery->getOption('enabled', $order) == 'yes';
 
-            $delivery->addLog('Order Cancelled', array('order' => $order_id, 'test' => $test));
+            $delivery->addLog('orderStatusCancelled::orderData', array('order' => $order_id, 'test' => $test));
            
             if ($test) {
                 $delivery->cancelJob($order_id);
@@ -223,15 +216,15 @@ class Stuart implements MainPluginController
         $delivery = $this->initializeCustomDeliveryClass();
         $order = new WC_Order($order_id);
         if ($order->has_shipping_method($delivery->id)) {
-            $test = $delivery->getOption('create_delivery', $order) == 'created' && $delivery->getOption('enabled', $order) == 'yes' && $delivery->getOption('start_delivery_on_order_pending', $order) == 'yes';
-            $delivery->addLog('Order Pending', array('order' => $order_id, 'test' => $test));
+            $test = $delivery->getOption('create_delivery_mode', $order) == 'pending' && $delivery->getOption('enabled', $order) == 'yes';
+            $delivery->addLog('orderStatusPending::orderData', array('order' => $order_id, 'test' => $test));
             if ($test) {
-                $this->orderPaid($order_id);
+                $this->readyToCreateJob($order_id);
             }
         }
     }
 
-    public function saveShippingDetails($order_id)
+    public function updateDeliveryFromTheBO($order_id)
     {
         $post_type = get_post_type($order_id);
         
@@ -240,36 +233,17 @@ class Stuart implements MainPluginController
         }
 
         $delivery = $this->initializeCustomDeliveryClass();
-        
-        if (isset($_POST['pickup_date'])) {
-            $pickup_date = wc_clean($_POST[ 'pickup_date' ]);
 
-            if (!empty($pickup_date)) {
-                if (isset($_POST['pickup_id'])) {
-                    $pickup_id = wc_clean($_POST[ 'pickup_id' ]);
-                    update_post_meta($order_id, 'stuart_pickup_id', $pickup_id);
-                }
-
-                $pickup_date = str_replace(array('/', 'h'), array('-', ':'), $pickup_date);
-
-                $explode_time = explode(' ', $pickup_date);
-
-                $pickup_day = $explode_time[0];
-                $pickup_hour = isset($explode_time[1]) ? $explode_time[1] : date('H:i');
-
-                $pickup_time = $delivery->getSettingTime($pickup_day, $pickup_hour);
-
-                update_post_meta($order_id, 'stuart_modified_date', 1);
-
-                if (isset($_POST['action_job']) && wc_clean($_POST['action_job']) == 'reschedule') {
-                    $delivery->rescheduleJob($pickup_time, $order_id, true);
-                } else {
-                    $delivery->setPickupTime($pickup_time, $order_id);
-                }
-            }
+        if (isset($_POST['create_job'])) {
+            $pickup_time = get_post_meta($order_id, 'stuart_pickup_time', true);
+            $delivery->addLog('updateDeliveryFromTheBO::createJob', $pickup_time);
+            $delivery->rescheduleJob($pickup_time, $order_id, true);
         }
 
-        if (isset($_POST['action_job']) && wc_clean($_POST['action_job']) == 'cancel') {
+        //TODO: implement update job on shipping address change
+
+        if (isset($_POST['cancel_job'])) {
+            $delivery->addLog('updateDeliveryFromTheBO::cancelJob', $_POST);
             $delivery->cancelJob($order_id);
         }
     }
@@ -292,12 +266,15 @@ class Stuart implements MainPluginController
             "accepted"    => esc_html__('Stuart found a driver and delivery will begin on time.', 'stuart-delivery'),
             "in_progress" => esc_html__('Driver has accepted the job and started the delivery.', 'stuart-delivery'),
             "finished"    => esc_html__('The package was delivered successfully.', 'stuart-delivery'),
-            "canceled"    => esc_html__('The package won\'t be delivered as it was cancelled by the client.', 'stuart-delivery'),
+            "canceled"    => esc_html__('The package won\'t be delivered as it was cancelled.', 'stuart-delivery'),
             "voided"      => esc_html__('Delivery cancelled, you won\'t be charged.', 'stuart-delivery'),
             "expired"     => esc_html__('Delivery has expired. No driver accepted the job. It didn\'t cost any money.', 'stuart-delivery')
         );
 
-        if ((int) $job_id !== 0 && isset($job->status) && isset($delivery_status[$job->status])) {
+        if ((int) $job_id == -1) {
+            $current_state_description = $delivery_status['canceled'];
+            $current_state_title = 'canceled';
+        } elseif ((int) $job_id !== 0 && isset($job->status) && isset($delivery_status[$job->status])) {
             $current_state_title = $job->status;
             $current_state_description = $delivery_status[$job->status];
         } else {
@@ -319,21 +296,75 @@ class Stuart implements MainPluginController
             .stuart-backoffice-wrapper h3 { margin-top: 10px; }
             
             .stuart-logo-wrapper {
-                display: block;
+                display: inline-block;
                 height: 40px;
+                line-height: 40px;
+                width: 100%;
             }
             
             .stuart-logo-wrapper img { 
                 max-width: 100%; 
-                display: block; 
+                display: inline-block; 
                 max-height: 100%;
             }
 
+            .stuart-logo-wrapper a {
+                display: inline-block;
+                vertical-align: top;
+                float: right;
+            }
+
+            .edit_address {
+                display: none;
+            }
+
+            .stuart-button-danger {
+                color: #fff;
+                background-color: #d9534f;
+                border-color: #d43f3a;
+                padding: 6px 12px;
+                border-radius: 4px;
+                border: 1px solid transparent;
+                cursor: pointer;
+                float: left;
+            }
+
+            .stuart-button-normal {
+                color: #fff;
+                background-color: #337ab7;
+                border-color: #2e6da4;
+                padding: 6px 12px;
+                border-radius: 4px;
+                border: 1px solid transparent;
+                cursor: pointer;
+                float: left;
+            }
+
+            .stuart-button-danger:hover {
+                background-color: #c9302c;
+                border-color: #ac2925;
+            }
+
         </style>
+        <script>
+            function cancelDelivery(){
+                document.querySelector('#cancel_job').checked = true;
+                document.querySelector('.save_order').click();
+            }
+            function createDelivery(){
+                document.querySelector('#create_job').checked = true;
+                document.querySelector('.save_order').click();
+            }
+        </script>
         <div class="stuart-backoffice-wrapper">
                 
             <div class="address">
-                <div class="stuart-logo-wrapper"><img src="<?php echo plugin_dir_url(__FILE__).'img/logo_stuart.png'; ?>" alt="Stuart Logo"></div>
+                <div class="stuart-logo-wrapper">
+                    <img src="<?php echo plugin_dir_url(__FILE__).'img/logo_stuart.png'; ?>" alt="Stuart Logo">
+                    <?php if (!in_array($current_state_title, array('not_schedule'))) : ?>
+                        <a target="_blank" rel="noopener noreferrer" href="<?php echo esc_url(($delivery->getOption('env') == 'yes' ? 'https://dashboard.sandbox.stuart.com/jobs/' : 'https://dashboard.sandbox.stuart.com/jobs/') . $job_id) ?>">Stuart Dashboard</a>
+                    <?php endif; ?>
+                </div>
                 <h3><?php esc_html_e('Delivery state :', 'stuart-delivery');
         echo ' '.esc_html(ucfirst(str_replace('_', ' ', $current_state_title))); ?></h3>
                 <p<?php if (empty($pickup_time)) {
@@ -360,35 +391,37 @@ class Stuart implements MainPluginController
                 <?php endif; ?>
 
             </div>
-            <?php if (in_array($current_state_title, array('not_schedule', 'expired', 'canceled', 'voided', 'new', 'scheduled', 'searching'))) : ?>
-                <div class="stuart_edit_pickup_time"><?php
-
-                    $pickup_id = $order->get_meta('stuart_pickup_id', true);
-
-        woocommerce_wp_text_input(array(
-                        'id' => 'pickup_date',
-                        'label' => esc_html__('Pickup date & time ', 'stuart-delivery'),
-                        'style' => 'width:150px; display: block;',
-                        'placeholder' => '23/12/2018 13:59',
-                        'value' => !empty($pickup_time) ? esc_html($delivery->formatToDate('d/m/Y H:i', is_numeric($pickup_time) ? $pickup_time : $delivery->getTime($pickup_time))) : '',
-                        'description' => esc_html__('Format : dd/mm/yyyy hh:mm', 'stuart-delivery'),
-                    )); ?></div>
-                <div class="stuart_edit_job_action"><?php
-                    woocommerce_wp_select(array(
-                        'id' => 'action_job',
-                        'label' => esc_html__('Cancel or change delivery', 'stuart-delivery'),
-                        'wrapper_class' => 'form-field-wide misha-set-tip-style',
-                        'value' => 'no',
-                        'description' => esc_html__('Do you want to cancel or relaunch the delivery now ?', 'stuart-delivery'),
-                        'options' => array(
-                            'no' => esc_html__('No', 'stuart-delivery'),
-                            'reschedule' => esc_html__('Schedule with time above', 'stuart-delivery'),
-                            'cancel' => esc_html__('Cancel it now', 'stuart-delivery'),
-                        )
-                    )); ?></div>
+            <?php if (in_array($current_state_title, array('not_schedule')) && $delivery->getOption('create_delivery_mode', $order) == "manual") : ?>
+                <?php
+                    woocommerce_wp_checkbox(
+            array(
+                            'id'            => 'create_job',
+                            'wrapper_class' => 'misha-set-tip-style',
+                            'label'         => '',
+                            'description'   => '',
+                            'class'         => 'hidden-input-create',
+                            'style'         => 'display:none',
+                            )
+        ); ?>
+                <button type="button" onclick="createDelivery()" class="stuart-button-normal"><?php esc_html_e('Create delivery', 'stuart-delivery'); ?></button>
+            <?php endif; ?>
+            <?php if (in_array($current_state_title, array('new', 'scheduled', 'searching'))) : ?>
+                <div class="stuart_edit_job_action">
+                <button type="button" onclick="cancelDelivery()" class="stuart-button-danger"><?php esc_html_e('Cancel this delivery', 'stuart-delivery'); ?></button>
+                <?php
+                    woocommerce_wp_checkbox(
+            array(
+                            'id'            => 'cancel_job',
+                            'wrapper_class' => 'misha-set-tip-style',
+                            'label'         => '',
+                            'description'   => '',
+                            'class'         => 'hidden-input-delete',
+                            'style'         => 'display:none',
+                            )
+        ); ?></div>
             <?php
                 else :
-                    if (isset($job->deliveries[0]->tracking_url)) :
+                    if (isset($job->deliveries[0]->tracking_url) && !in_array($current_state_title, array('canceled'))) :
                         ?>
                         <p><a href='<?php echo esc_url($job->deliveries[0]->tracking_url); ?>' target='_blank'><?php esc_html_e('Click here to follow delivery.', 'stuart-delivery'); ?></a></p>
                         <?php
@@ -403,12 +436,26 @@ class Stuart implements MainPluginController
         echo apply_filters('stuart_backoffice_html', $content, $delivery, $order);
     }
 
+    public function cronJob()
+    {
+        $delivery = $this->initializeCustomDeliveryClass();
+        $delivery->checkJobStates();
+        $delivery->purgeLogs();
+    }
+
+    public function cronActivation()
+    {
+        if (! wp_next_scheduled('stuart_hourly_cron')) {
+            wp_schedule_event(time(), 'hourly', 'stuart_hourly_cron');
+        }
+    }
+
     public function setHiddenFormField($checkout)
     {
         $delivery = $this->initializeCustomDeliveryClass();
-        $pickup_time = $delivery->getPickupTime();
+        $now = time();
         echo '<div id="stuart_hidden_checkout_field">
-                <input type="hidden" class="input-hidden" name="stuart_pickup_time" id="stuart_pickup_time" value="' . esc_html($pickup_time) . '">
+                <input type="hidden" class="input-hidden" name="stuart_pickup_time" id="stuart_pickup_time" value="' . esc_html($now) . '">
         </div>';
     }
 
@@ -446,6 +493,10 @@ class Stuart implements MainPluginController
 
         $cart = $this->getCart();
         $packages = $cart->get_shipping_packages();
+
+        if ($delivery->getOption('debug_mode') == "yes") {
+            $delivery->addLog('reviewOrderAfterShipping:packages', $packages);
+        }
 
         if ($delivery->getOption('enabled', $packages) == 'no') {
             return;
@@ -510,12 +561,6 @@ class Stuart implements MainPluginController
             }
         }
 
-        if (empty($time_list) || $total_price === false) {
-            $this->reviewNoticeFrontOrder();
-
-            return;
-        }
-
         $stuart_logo = plugin_dir_url(__FILE__).'img/logo_stuart.png';
 
         $current_job_time = (int) $delivery->getPickupTime($cart);
@@ -526,6 +571,10 @@ class Stuart implements MainPluginController
         $first_time_available = $delivery->getFirstDeliveryTime($time_list);
         $start_pause = $first_time_available['pause_start'];
         $end_pause = $first_time_available['pause_end'];
+
+        if ($delivery->getOption('debug_mode') == "yes") {
+            $delivery->addLog('reviewOrderAfterShipping:timeList', $time_list);
+        }
 
         if (file_exists(get_template_directory().'/plugins/stuart/templates/after_shipping.php')) {
             include get_template_directory().'/plugins/stuart/templates/after_shipping.php';
@@ -565,7 +614,7 @@ class Stuart implements MainPluginController
             $job = $delivery->getJob($job_id);
 
             if (empty($job)) {
-                if ($order->has_status('completed') || ($order->has_status('processing') && $delivery->getOption('start_delivery_on_order_processing', $order) == 'yes')) {
+                if ($order->has_status('completed') || ($order->has_status('processing') && $delivery->getOption('create_delivery_mode', $order) == 'procesing')) {
                     $delivery->createJob((int) $data['id']);
                     $job_id = $delivery->getJobId((int) $data['id']);
                     $job = $delivery->getJob($job_id);
@@ -604,43 +653,6 @@ class Stuart implements MainPluginController
         $custom_actions['stuart_settings'] = sprintf('<a href="%s">%s</a>', $settings_link, esc_html__('Settings', 'stuart-delivery'));
         $custom_actions['stuart_docs'] = sprintf('<a href="%s" target="_blank">%s</a>', $support_link, esc_html__('Docs & Support', 'stuart-delivery'));
         return array_merge($custom_actions, $actions);
-    }
-
-    public function getCourierMapLink()
-    {
-        $cart = $this->getCart();
-        $delivery = $this->initializeCustomDeliveryClass();
-
-        if ($cart) {
-            $packages = $cart->get_shipping_packages();
-
-            if (!empty($packages)) {
-                foreach ($packages as $package) {
-                    $params = $delivery->prepareJobObject($package);
-                    
-                    if (!empty($params)) {
-                        $destination_addr = $params->job->dropoffs[0]->address;
-                        $origin_addr = $params->job->pickups[0]->address;
-
-                        $key = $delivery->getOption('maps_api_key_iframe');
-
-                        if (!empty($key) && !empty($destination_addr) && !empty($origin_addr)) {
-                            $delivery_mode = $delivery->getOption('delivery_mode', $package);
-
-                            if (in_array($delivery_mode, ['bike', 'cargobike', 'cargobikexl'])) {
-                                $mode = '&mode=bicycling';
-                            } else {
-                                $mode = '';
-                            }
-                            
-                            return 'https://www.google.com/maps/embed/v1/directions?origin='.$origin_addr.'&destination='.$destination_addr.$mode.'&key='.$key;
-                        }
-                    }
-                }
-            }
-        }
-
-        return "";
     }
 
     public function addCustomEndpointsToThisSite()
@@ -700,16 +712,15 @@ class Stuart implements MainPluginController
             $the_pickup = $delivery->dateToFormat($pickup_time + $fifteen_minutes, 'H:i');
         }
 
-        echo "
-        <div class='stuart_order_confirmation_follow'>
-            <h3>".esc_html__('Follow your order', 'stuart-delivery')."</h3>
-            <p><i>".esc_html__('Delivery around', 'stuart-delivery')." ".esc_html($the_date)." - ".esc_html($the_pickup)."</i> <a target='_blank' href='".esc_url($followurl)."'>(".esc_html__('Link', 'stuart-delivery').")</a></p>
-            ".(
-            $delivery->getOption('create_delivery', $order) !== "created" ? '' :
-            "<iframe class='stuart-order-follow-iframe' border='0' style='width: 100%; display: block; margin: 20px auto; min-height: 350px; border: 1px solid #F2F2F2;' src='".esc_url($followurl)."'></iframe>"
-        )."
-        </div>
-        ";
+        if ($delivery->getOption('create_delivery_mode', $order) !== "manual") {
+            echo "
+            <div class='stuart_order_confirmation_follow'>
+                <h3>".esc_html__('Follow your order', 'stuart-delivery')."</h3>
+                <p><i>".esc_html__('Delivery around', 'stuart-delivery')." ".esc_html($the_date)." - ".esc_html($the_pickup)."</i> <a target='_blank' href='".esc_url($followurl)."'>(".esc_html__('Link', 'stuart-delivery').")</a></p>
+                <iframe class='stuart-order-follow-iframe' border='0' style='width: 100%; display: block; margin: 20px auto; min-height: 350px; border: 1px solid #F2F2F2;' src='".esc_url($followurl)."'></iframe>
+            </div>
+            ";
+        }
     }
 
     // Singleton
