@@ -592,6 +592,15 @@ if (! class_exists('StuartShippingMethod')) {
 
                         .form-table th {
                             color: white;
+                            border: 1px dashed;
+                            padding: 20px;
+                            border-color: #7AFB4C;
+                        }
+
+                        .form-table td {
+                            border: 1px dashed;
+                            padding: 20px;
+                            border-color: #7AFB4C;
                         }
                     </style>
                     <tbody style="display: block; height: 400px; overflow-y: scroll">
@@ -842,6 +851,7 @@ if (! class_exists('StuartShippingMethod')) {
             curl_setopt($ch, CURLOPT_URL, trim($env.$url));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_USERAGENT, 'Stuart-WooCommerce-Plugin v1');
 
             if (!empty($token)) {
                 $headers[] = 'Authorization: Bearer '.$token;
@@ -1650,7 +1660,6 @@ if (! class_exists('StuartShippingMethod')) {
 
             if ($delay >= $one_day_minutes) {
                 $days = $delay / $one_day_minutes;
-
                 $day_delay = floor($days);
             } else {
                 $day_delay = 0;
@@ -1676,16 +1685,18 @@ if (! class_exists('StuartShippingMethod')) {
                     $high_time = $this->getSettingTime($high_date->format('d-m-Y'), $high_date->format('H:i'));
                     $low_time = $this->getSettingTime($low_date->format('d-m-Y'), $low_date->format('H:i'));
 
-                    if ($this->isDeliveryTime($high_time, $context) && $this->isDeliveryTime($low_time, $context)) {
-                        $result[$i] = array(
-                          'day' => 'now + '.$i.' day',
-                          'before' => $day_high_hour,
-                          'after' => $day_low_hour,
-                          'pause_start' => $working_pause_low,
-                          'pause_end' => $working_pause_high
-                        );
+                    $result[$i] = array(
+                        'day' => 'now + '.$i.' day',
+                        'before' => $day_high_hour,
+                        'after' => $day_low_hour,
+                        'pause_start' => $working_pause_low,
+                        'pause_end' => $working_pause_high
+                      );
+                    $this->addLog('getDeliveryTimeList::loop', $result[$i]);
 
-                        $first_day = false;
+                    $first_day = false;
+
+                    if ($this->isDeliveryTime($high_time, $context) && $this->isDeliveryTime($low_time, $context)) {
                     }
                 }
             }

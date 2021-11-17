@@ -454,8 +454,9 @@ class Stuart implements MainPluginController
     {
         $delivery = $this->initializeCustomDeliveryClass();
         $now = time();
+        $delay = $delivery->getOption('delay') * 60;
         echo '<div id="stuart_hidden_checkout_field">
-                <input type="hidden" class="input-hidden" name="stuart_pickup_time" id="stuart_pickup_time" value="' . esc_html($now) . '">
+                <input type="hidden" class="input-hidden" name="stuart_pickup_time" id="stuart_pickup_time" value="' . esc_html($now+$delay) . '">
         </div>';
     }
 
@@ -571,6 +572,7 @@ class Stuart implements MainPluginController
         $first_time_available = $delivery->getFirstDeliveryTime($time_list);
         $start_pause = $first_time_available['pause_start'];
         $end_pause = $first_time_available['pause_end'];
+        $delay = $delivery->getOption('delay');
 
         if ($delivery->getOption('debug_mode') == "yes") {
             $delivery->addLog('reviewOrderAfterShipping:timeList', $time_list);

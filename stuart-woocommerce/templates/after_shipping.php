@@ -91,12 +91,11 @@
 			<div id="stuart_delivery_wrapper" style="display:none;margin: 5px 0px;">
 				<div style="display: inline;" class="stuart_delivery_date">
 					<select onchange="setTimeSlots(event)" name="stuart_date" id="stuart_date" data-server-time="<?php echo esc_html($server_time); ?>">
-						<?php foreach ($time_list as $time) {
-    echo '<option '.($delivery->formatToDate('d/m', $current_job_time) == $delivery->formatToDate('d/m', $delivery->getTime($time['day'])) ? 'selected' : '').' data-time-day="'.esc_html($delivery->formatToDate('Y/m/d', $delivery->getTime($time['day']))).'" data-time-before="'.esc_html($time['before']).'" data-time-after="'.esc_html($time['after']).'"  data-start-pause="'.esc_html($time['pause_start']).'" data-end-pause="'.esc_html($time['pause_end']).'" value="'.esc_html($time['day']).'">'.esc_html($delivery->formatToDate('d/m', $delivery->getTime($time['day']))).'</option>';
+						<?php foreach ($time_list as $i=>$time) {
+    echo '<option '.($i === 0 ? 'selected' : '').' data-time-day="'.esc_html($delivery->formatToDate('Y/m/d', $delivery->getTime($time['day']))).'" data-time-before="'.esc_html($time['before']).'" data-time-after="'.esc_html($time['after']).'"  data-start-pause="'.esc_html($time['pause_start']).'" data-end-pause="'.esc_html($time['pause_end']).'" value="'.esc_html($time['day']).'">'.esc_html($delivery->formatToDate('d/m', $delivery->getTime($time['day']))).'</option>';
 } ?>
 					</select>
 				</div>
-
 				<div style="display: inline;" class="stuart_delivery_at">
 	  				<?php esc_html_e('at', 'stuart-delivery'); ?>
 	  			</div>
@@ -109,6 +108,8 @@
 		
 			<div id="stuart_result_ajax">
 			</div>
+
+			<?php echo '<script>window.delay = '.$delay.'</script>' ?>
 
 			<script>
 
@@ -139,9 +140,10 @@
     				const endingPoint = new Date(`${selectedOption.timeDay} ${selectedOption.timeBefore}`).getTime();
     				const startPause = selectedOption.startPause !== "00:00" ? new Date(`${selectedOption.timeDay} ${selectedOption.startPause}`).getTime() : null;
     				const endingPause = selectedOption.endPause !== "00:00" ? new Date(`${selectedOption.timeDay} ${selectedOption.endPause}`).getTime() : null;
-    				const now = new Date().getTime();
+					const delayMs = delay * 60000;
+					const now = new Date().getTime() + delayMs;
     				const timeSlots = [];
-					for (let i=(now > startPoint && new Date(selectedOption.timeDay).getDate() === new Date().getDate() ? now : startPoint ); i+1800000 < endingPoint; i += 1800000){
+					for (let i=(now > startPoint && new Date(selectedOption.timeDay).getDate() === new Date().getDate() ? now : startPoint ); i+delayMs < endingPoint; i += delayMs){
     				    if (startPause < i && i < endingPause){
 							continue;
 						} else {
