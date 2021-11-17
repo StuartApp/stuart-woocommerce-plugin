@@ -157,7 +157,7 @@
 					const timeSelection = document.querySelector('#stuart_time');
 					timeSelection.innerHTML = '';
     				timeSlots.forEach((timeSlot) => {
-						timeSelection.append(new Option(`${addZero(timeSlot.getHours())}:${addZero(timeSlot.getMinutes())}`, timeSlot.getTime()/1000));
+						timeSelection.append(new Option(`${addZero(timeSlot.getHours())}:${addZero(timeSlot.getMinutes())}`, Math.round(timeSlot.getTime()/1000)));
 					}) 
 				}
 
