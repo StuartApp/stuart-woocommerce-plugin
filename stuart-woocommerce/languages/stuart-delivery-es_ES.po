@@ -1,0 +1,323 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Stuart Delivery For WooCommerce\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-17\n"
+"PO-Revision-Date: 2021-11-18 13:10+0100\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Language: es\n"
+
+msgid "Stuart Delivery Plugin requires PHP 5.3 or higher and your current PHP version is %s. Please (contact your host to) update your PHP version."
+msgstr "Stuart Delivery Plugin requiere PHP 5.3 o superior, pero su versión actual de PHP es %s. Por favor póngase en contacto con su administrador para actualizar su versión de PHP."
+
+msgid "Basic settings"
+msgstr "Ajustes básicos"
+
+msgid "Hours & days"
+msgstr "Horas & días"
+
+msgid "Select time range to start your delivery"
+msgstr "Selecciona un intervalo de tiempo para tu pedido"
+
+msgid "As soon as possible"
+msgstr "Lo más pronto posible"
+
+msgid "At a specific time"
+msgstr "En una fecha específica"
+
+msgid "around"
+msgstr "aproximadamente"
+
+msgid "Advanced configuration"
+msgstr "Configuración avanzada"
+
+msgid "Logs"
+msgstr "Registros"
+
+msgid "Delivery accepted by Stuart and will be assigned to a driver."
+msgstr "El pedido ha sido aceptado por Stuart y será asignado a un repartidor."
+
+msgid "Delivery has been scheduled. It will start later."
+msgstr "El pedido ha sido programado. Comenzará más tarde."
+
+msgid "Stuart is looking for a driver. It should start soon."
+msgstr "Stuart está buscando un repartidor. El envío debería comenzar pronto."
+
+msgid "Stuart found a driver and delivery will begin on time."
+msgstr "Stuart ha encontrado un repartidor. El envío comenzará a tiempo."
+
+msgid "Driver has accepted the job and started the delivery."
+msgstr "El repartidor ha aceptado el pedido y comenzado el envío."
+
+msgid "The package was delivered successfully."
+msgstr "El paquete ha sido enviado correctamente."
+
+msgid "The package won't be delivered as it was cancelled."
+msgstr "El paquete no será enviado porque el pedido ha sido cancelado."
+
+msgid "Delivery cancelled, you won't be charged."
+msgstr "Pedido cancelado. No se te efectuará ningún cargo."
+
+msgid "Delivery has expired. No driver accepted the job. It didn't cost any money."
+msgstr "El pedido ha expirado. Ningún repartidor aceptó el envío. No se efectuará ningún cargo."
+
+msgid "No pickup time set."
+msgstr "Aún no se ha establecido ninguna fecha de recogida del pedido."
+
+msgid "Settings"
+msgstr "Ajustes"
+
+msgid "Docs & Support"
+msgstr "Documentación y Soporte"
+
+msgid "Follow your order"
+msgstr "Sigue tu pedido"
+
+msgid "Your package will depart from the store around"
+msgstr "Tu paquete se recogerá en la tienda en breves"
+
+msgid "Delivery on schedule"
+msgstr "Envío programado"
+
+msgid "Enable?"
+msgstr "Habilitar?"
+
+msgid "Enable Stuart Delivery Shipping"
+msgstr "Habilitar Stuart Delivery Shipping"
+
+msgid "Method Title"
+msgstr "Nombre del método de envío"
+
+msgid "This is the title that the user sees during checkout."
+msgstr "Este es el título que el usuario verá durante el checkout."
+
+msgid "Delivery now with Stuart"
+msgstr "Envío instantáneo con Stuart"
+
+msgid "Stuart client API ID"
+msgstr "Stuart client API ID"
+
+msgid "Stuart client API Secret"
+msgstr "Stuart client API Secret"
+
+msgid "How is the shipping fee calculated?"
+msgstr "Cómo se calculará el costo de envío?"
+
+msgid "Calculated by Stuart API"
+msgstr "Calculado por la API de Stuart"
+
+msgid "Use a fixed fee"
+msgstr "Usar un precio fijo"
+
+msgid "Add an extra fee over Stuart price"
+msgstr "Añadir una tasa extra sobre el precio de Stuart"
+
+msgid "Discount an amount from Stuart price"
+msgstr "Descontar una cantidad del precio de Stuart"
+
+msgid "Shipping fee"
+msgstr "Costo de envío"
+
+msgid "How much to add over Stuart prices?"
+msgstr "Cuánto añadir sobre el precio de Stuart?"
+
+msgid "Units are relative to Stuart API prices. For example: 10 is 10% over Stuart price"
+msgstr "Las unidades son relativas a los precios de Stuart. Por ejemplo: 10 significa 10% sobre el precio de Stuart"
+
+msgid "How much to discount from Stuart prices?"
+msgstr "Cuánto descontar de los precios de Stuart?"
+
+msgid "Do you offer free delivery after some price (tax included) ?"
+msgstr "Ofreces envío gratis a partir de cierto precio (impuestos incluidos) ?"
+
+msgid "0.00 to disable"
+msgstr "0.00 para deshabilitar"
+
+msgid "Address of your store"
+msgstr "Dirección de tu tienda"
+
+msgid "Street, building"
+msgstr "Calle, edificio"
+
+msgid "Address 2 of your store"
+msgstr "Segunda línea de la dirección de la tienda"
+
+msgid "Office number or floor or flat"
+msgstr "Número de oficina, piso o puerta"
+
+msgid "Your store ZIP/Post Code"
+msgstr "Código postal de tu tienda"
+
+msgid "Your store city name"
+msgstr "Nombre de la ciudad de tu tienda"
+
+msgid "Your store country name (in local language)"
+msgstr "Nombre del país de tu tienda"
+
+msgid "Pickup info: first name"
+msgstr "Información de recogida: nombre"
+
+msgid "First name of person to pickup products (i.e. your manager)"
+msgstr "Nombre de la persona que entregará el pedido al repartidor"
+
+msgid "Pickup info: last name"
+msgstr "Información de recogida: apellidos"
+
+msgid "Last name of person to pickup products (i.e. your manager)"
+msgstr "Apellidos de la persona que entregará el pedido al repartidor"
+
+msgid "Pickup info: company name"
+msgstr "Información de recogida: nombre de la compañía"
+
+msgid "Name of your company"
+msgstr "Nombre de tu empresa"
+
+msgid "Pickup info: e-mail"
+msgstr "Información de recogida: e-mail"
+
+msgid "E-mail of your company/site/person"
+msgstr "E-mail de tu empresa"
+
+msgid "Pickup info: phone number"
+msgstr "Información de recogida: número de teléfono"
+
+msgid "Phone number of your company/site/person"
+msgstr "Número de teléfono de tu compañía o responsable"
+
+msgid "Pickup info: special instructions"
+msgstr "Información de recogida: instrucciones especiales"
+
+msgid "Some special instructions for Stuart courier to pickup"
+msgstr "Instrucciones de recogida para el repartidor de Stuart"
+
+msgid "Filter delivery by postcodes"
+msgstr "Bloquear envío a códigos postales"
+
+msgid "Prevent delivery in some unexpected zones by allowing only certain postcodes. Indicate them like this "123456,1245367,21688" (separated by comma, no space). Leave empty to disable."
+msgstr "Impide que se hagan pedidos desde los códigos postales indicados. Indiquelos de la siguiente forma “123456,123457,123468” (separados por comas, sin espacios). Dejar vacío para enviar a cualquier código postal."
+
+msgid "What is the delay to prepare the order ?"
+msgstr "Cuánto tiempo se necesita para preparar el pedido ?"
+
+msgid "Prevent courier to come before you can prepare by adding minutes here."
+msgstr "Evita que el repartidor llegue antes de tiempo a tu tienda añadiendo aquí los minutos que necesitas para preparar el paquete."
+
+msgid "Monday"
+msgstr "Lunes"
+
+msgid "Tuesday"
+msgstr "Martes"
+
+msgid "Wednesday"
+msgstr "Miércoles"
+
+msgid "Thursday"
+msgstr "Jueves"
+
+msgid "Friday"
+msgstr "Viernes"
+
+msgid "Saturday"
+msgstr "Sábado"
+
+msgid "Sunday"
+msgstr "Domingo"
+
+msgid "Are you working on %s"
+msgstr "Trabajas los %s"
+
+msgid "Yes"
+msgstr "Sí"
+
+msgid "No"
+msgstr "No"
+
+msgid "At what time do you start on %s ?"
+msgstr "A qué hora comienzas a trabajar los %s ?"
+
+msgid "Format this in 24H format 23:23 for 11PM 23 minutes"
+msgstr "Utiliza el formato 24H (por ejemplo utiliza 23:23 para las 11PM y 23minutos)"
+
+msgid "At what time do you stop on %s ?"
+msgstr "A qué hora terminas de trabajar los %s ?"
+
+msgid "At what time do you start your pause on %s ?"
+msgstr "A qué hora comienzas tu descanso los %s ?"
+
+msgid "Leave 00:00 to disable."
+msgstr "Puedes dejarlo en 00:00 para deshabilitar."
+
+msgid "At what time do you stop your pause on %s ?"
+msgstr "A qué hora terminas tu descanso los %s ?"
+
+msgid "Holidays"
+msgstr "Vacaciones"
+
+msgid "Indicate day and month and separate by coma, for example :"
+msgstr "Indica el día y el mes separados por comas, por ejemplo:"
+
+msgid "Product category excluded from this delivery method"
+msgstr "Categorías de productos excluidas de este sistema de envío"
+
+msgid "Do you want to prevent products in a category to be delivered with Stuart ? Only categories with products are displayed here."
+msgstr "Quieres excluir alguna categoría de productos de este sistema de envío? (Sólo se muestran categorías con productos)"
+
+msgid "When should the Delivery be created?"
+msgstr "Cuándo debería iniciarse el pedido en Stuart?"
+
+msgid "When order is received (no payment initiated)"
+msgstr "Cuando se inicia la compra (antes de iniciar el pago"
+
+msgid "When order is on procesing (payment received)"
+msgstr "Cuando el pedido se empieza a procesar (después del pago"
+
+msgid "When order is completed"
+msgstr "Cuando el encargo se completa"
+
+msgid "Create Deliveries manually"
+msgstr "Crear los pedidos manualmente"
+
+msgid "Cancel Stuart Delivery on order cancelation"
+msgstr "Cancelar el envío de Stuart cuando se cancele el pedido"
+
+msgid "Cancel Stuart Delivery on order refunded"
+msgstr "Cancelar el envío con Stuart cuando se efectúe una devolución"
+
+msgid "Enable to cancel Stuart delivery, when order is refunded"
+msgstr "Habilitar esta opción para que el envío se auto-cancele cuando el pedido es devuelto"
+
+msgid "Limit days to schedule order"
+msgstr "Número máximo de días para programar un pedido"
+
+msgid "3 weeks by default. Cannot be shorter than 1."
+msgstr "3 semanas por defecto. No puede ser inferior a 1."
+
+msgid "Is this a production account ?"
+msgstr "Usar el modo de producción ?"
+
+msgid "Uncheck to use sandbox version"
+msgstr "Desmarcar para utilizar el entorno de sandbox"
+
+msgid "Debug logs"
+msgstr "Registros extendidos"
+
+msgid "It will create more logs and allow you to have a better insight of what is happening. Logs are encrypted and deleted after one month for security purpose."
+msgstr "Esta opción te permitirá tener un mejor conocimiento de lo que está ocurriendo. Los registros se encriptan y se eliminan después de un mes por seguridad."
+
+msgid "The delivery was created on Stuart"
+msgstr "El pedido se ha creado en Stuart"
+
+msgid "There was a problem canceling the delivery on Stuart"
+msgstr "Ha habido un problema cancelando el pedido en Stuart"
+
+msgid "There was a problem canceling the delivery"
+msgstr "Ha habido un problema cancelando el pedido"
+
+msgid "The delivery was canceled on Stuart"
+msgstr "El pedido ha sido cancelado en Stuart"

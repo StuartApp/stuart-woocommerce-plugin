@@ -704,21 +704,21 @@ class Stuart implements MainPluginController
 
         $followurl = $this->getFollowUrl($order_id);
         $pickup_time = $delivery->getPickupTime($order);
-        $fifteen_minutes = 900;
+        $delay = $delivery->getOption('delay') * 60;
 
         if (function_exists('wp_date')) {
             $the_date = wp_date(get_option('date_format'). ' H:i', $pickup_time);
-            $the_pickup = wp_date('H:i', $pickup_time + $fifteen_minutes);
+            $the_pickup = wp_date('H:i', $pickup_time + $delay);
         } else {
             $the_date = $delivery->dateToFormat($pickup_time, get_option('date_format'). ' H:i');
-            $the_pickup = $delivery->dateToFormat($pickup_time + $fifteen_minutes, 'H:i');
+            $the_pickup = $delivery->dateToFormat($pickup_time + $delay, 'H:i');
         }
 
         if ($delivery->getOption('create_delivery_mode', $order) !== "manual") {
             echo "
             <div class='stuart_order_confirmation_follow'>
                 <h3>".esc_html__('Follow your order', 'stuart-delivery')."</h3>
-                <p><i>".esc_html__('Delivery around', 'stuart-delivery')." ".esc_html($the_date)." - ".esc_html($the_pickup)."</i> <a target='_blank' href='".esc_url($followurl)."'>(".esc_html__('Link', 'stuart-delivery').")</a></p>
+                <p><i>".esc_html__('Your package will depart from the store around', 'stuart-delivery')." ".esc_html($the_date)." - ".esc_html($the_pickup)."</i> <a target='_blank' href='".esc_url($followurl)."'>(".esc_html__('Link', 'stuart-delivery').")</a></p>
                 <iframe class='stuart-order-follow-iframe' border='0' style='width: 100%; display: block; margin: 20px auto; min-height: 350px; border: 1px solid #F2F2F2;' src='".esc_url($followurl)."'></iframe>
             </div>
             ";

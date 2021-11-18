@@ -481,7 +481,7 @@ if (! class_exists('StuartShippingMethod')) {
                 ),
               'value' => 'yes' ,
               'default' => 'no' ,
-              'description' => esc_html__('It will create more logs and allow you to have a better insight of what is happening. Logs are encrypted and deleted after one month for security purpose as they might contain personnal data and be elligible to GDPR rules.', 'stuart-delivery') ,
+              'description' => esc_html__('It will create more logs and allow you to have a better insight of what is happening. Logs are encrypted and deleted after one month for security purpose.', 'stuart-delivery') ,
               'tab' => "advanced",
           );
   
@@ -851,7 +851,7 @@ if (! class_exists('StuartShippingMethod')) {
             curl_setopt($ch, CURLOPT_URL, trim($env.$url));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HEADER, false);
-            curl_setopt($ch, CURLOPT_USERAGENT, 'Stuart-WooCommerce-Plugin v1');
+            curl_setopt($ch, CURLOPT_USERAGENT, 'stuart-woocommerce-plugin v0');
 
             if (!empty($token)) {
                 $headers[] = 'Authorization: Bearer '.$token;

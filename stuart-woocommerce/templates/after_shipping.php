@@ -4,6 +4,8 @@
   *
   *	Copy this file in wp-content/themes/{mytheme}/plugins/stuart/templates/after_shipping.php
   * to override its content without fear of updates.
+  * Use $delay to get access to the Admin delay configuration (in minutes)
+  * Use $time_list to get access to the list of available time slots from the Admin configuration
   * Use $delivery to get access to Stuart Shipping Method class
   *
   */
@@ -78,7 +80,7 @@
 		
 		<?php if (!empty($time_list)): ?>
 		
-			<div style="margin: 5px;" class="subtitle stuart_delivery_title"><?php esc_html_e('When do you want to receive your delivery?', 'stuart-delivery'); ?></div>
+			<div style="margin: 5px;" class="subtitle stuart_delivery_title"><?php esc_html_e('Select time range to start your delivery', 'stuart-delivery'); ?></div>
 		 	
 			<label onclick="markDeliverNow()" class="switch">
   				<input id="deliver-now-checkbox" type="checkbox" checked>
@@ -97,7 +99,7 @@
 					</select>
 				</div>
 				<div style="display: inline;" class="stuart_delivery_at">
-	  				<?php esc_html_e('at', 'stuart-delivery'); ?>
+	  				<?php esc_html_e('around', 'stuart-delivery'); ?>
 	  			</div>
 				<div style="display: inline;" class="stuart_delivery_time">
 	  				<select onchange="setPickUpTime(event)" name="stuart_time" id="stuart_time"></select>
@@ -156,8 +158,8 @@
 					}
 					const timeSelection = document.querySelector('#stuart_time');
 					timeSelection.innerHTML = '';
-    				timeSlots.forEach((timeSlot) => {
-						timeSelection.append(new Option(`${addZero(timeSlot.getHours())}:${addZero(timeSlot.getMinutes())}`, Math.round(timeSlot.getTime()/1000)));
+    				timeSlots.forEach((timeSlot, index) => {
+						timeSelection.append(new Option(`${addZero(timeSlot.getHours())}:${addZero(timeSlot.getMinutes())} - ${addZero(timeSlots[index+1].getHours())}:${addZero(timeSlots[index+1].getMinutes())}`, Math.round(timeSlot.getTime()/1000)));
 					}) 
 				}
 
