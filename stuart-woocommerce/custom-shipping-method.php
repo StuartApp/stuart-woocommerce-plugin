@@ -682,6 +682,10 @@ if (! class_exists('StuartShippingMethod')) {
                 return;
             }
 
+            if ($this->getOption('debug_mode') == "yes") {
+                $this->addLog('calculate_shipping::package', $package);
+            }
+
             $job_price = (float) $this->getJobPricing($package);
 
             if (empty($job_price)) {
@@ -1282,18 +1286,8 @@ if (! class_exists('StuartShippingMethod')) {
             }
 
             if (!isset($pickup_date)) {
-                $time_list = $this->getDeliveryTimeList($object);
-
-                $first_time_available = $this->getFirstDeliveryTime($time_list);
-
-                if ($first_time_available) {
-                    $pickup_time = $this->getTime($first_time_available['day'].' '.$first_time_available['after']);
-
-                    $this->setPickupTime($pickup_time);
-                } else {
-                    return false;
-                }
-         
+                $pickup_time = $this->getNextDeliveryTime();
+                $this->setPickupTime($pickup_time);
                 $pickup_date = new DateTime('@'.$pickup_time);
                 $pickup_date->setTimezone($this->getTimeZone());
             }
@@ -1447,6 +1441,7 @@ if (! class_exists('StuartShippingMethod')) {
                 return $time;
             }
 
+            /*
             $session = $this->getSession();
 
             if (empty($session)) {
@@ -1454,6 +1449,7 @@ if (! class_exists('StuartShippingMethod')) {
             } else {
                 $pickup = $session->get('stuart_pickup_time');
             }
+            */
 
             if (!empty($pickup)) {
                 if (is_numeric($pickup)) {
@@ -1470,21 +1466,7 @@ if (! class_exists('StuartShippingMethod')) {
             }
 
             if (!isset($pickup_time)) {
-                $time_list = $this->getDeliveryTimeList($object);
-
-                $first_time_available = $this->getFirstDeliveryTime($time_list);
-
-                if ($first_time_available) {
-                    $basic_str = $first_time_available['day'].' '.$first_time_available['after'];
-                } else {
-                    $basic_str = "";
-                }
-
-                if (empty($basic_str)) {
-                    return false;
-                } else {
-                    $pickup_time = $this->getTime($basic_str);
-                }
+                $pickup_time = $this->getNextDeliveryTime();
             
                 if (!is_a($object, 'WC_Order')) {
                     $this->setPickupTime($pickup_time);
@@ -1692,7 +1674,6 @@ if (! class_exists('StuartShippingMethod')) {
                         'pause_start' => $working_pause_low,
                         'pause_end' => $working_pause_high
                       );
-                    $this->addLog('getDeliveryTimeList::loop', $result[$i]);
 
                     $first_day = false;
 
@@ -1877,6 +1858,8 @@ if (! class_exists('StuartShippingMethod')) {
                 $object = $this->getCart();
             }
 
+            $this->addLog("rescheduleJob::pickup_time", $pickup_time);
+
             $price = $this->getJobPricing($object);
 
             if ($job_creation !== false) {
@@ -2044,6 +2027,19 @@ if (! class_exists('StuartShippingMethod')) {
             }
 
             return $delay;
+        }
+
+        private function getNextDeliveryTime($time = 'now')
+        {
+            $delay = $this->getDelay();
+            $startingPoint = $time === 'now' ? time() : $time;
+            $firstTimeAvailable = $startingPoint + ($delay * 60);
+            $this->addLog('getNextDeliveryTime::firstTimeAvailable', $firstTimeAvailable);
+            while (!$this->isDeliveryTime($firstTimeAvailable)) {
+                $firstTimeAvailable += $delay;
+            }
+
+            return $firstTimeAvailable;
         }
     }
 }
