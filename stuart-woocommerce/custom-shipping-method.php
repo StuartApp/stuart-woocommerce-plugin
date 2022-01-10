@@ -1,6 +1,6 @@
 <?php
 
-require_once(WP_CONTENT_DIR . '/plugins/stuart-woocommerce/interfaces/stuart-shipping-method.php');
+require_once(plugin_dir_path(__FILE__) . '/interfaces/stuart-shipping-method.php');
 
 if (! class_exists('StuartShippingMethod')) {
     class StuartShippingMethod extends WC_Shipping_Method implements StuartCustomShippingMethod

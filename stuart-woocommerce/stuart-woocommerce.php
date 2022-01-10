@@ -16,8 +16,8 @@ if (! defined('WP_CONTENT_DIR')) {
 }
 
 // Autoload all the dependencies of this plugin
-require_once(WP_CONTENT_DIR . '/plugins/stuart-woocommerce/vendor/autoload.php');
-require_once(WP_CONTENT_DIR . '/plugins/stuart-woocommerce/interfaces/plugin-controller.php');
+require_once(plugin_dir_path(__FILE__) . '/vendor/autoload.php');
+require_once(plugin_dir_path(__FILE__) . '/interfaces/plugin-controller.php');
 
 class Stuart implements MainPluginController
 {
