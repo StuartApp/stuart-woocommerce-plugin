@@ -1432,8 +1432,8 @@ if (! class_exists('StuartShippingMethod')) {
         {
             if (is_a($object, 'WC_Order')) {
                 $pickup_str = $object->get_meta('stuart_pickup_time', true);
-                $pickup_str = apply_filters('stuart_get_pickup_order_time', $pickup_str, $object);
-                $time = $this->getTime($pickup_str);
+
+                $time = $pickup_str === "" ? $this->getNextDeliveryTime() : $this->getTime($pickup_str);
 
                 if ($this->getOption('debug_mode') == "yes") {
                     $this->addLog('getPickupTime::OrderObject', array('order_id' => is_a($object, 'WC_Order') ? $object->get_id() : '', 'pickup_str' => $pickup_str, 'pickup_date' => $this->dateToFormat($time, 'c'), 'is_delivery_time' => $this->isDeliveryTime($time, $object)));
@@ -1869,7 +1869,7 @@ if (! class_exists('StuartShippingMethod')) {
                 return true;
             } else {
                 $order = wc_get_order($order_id);
-                $note = esc_html__('There was a problem canceling the delivery on Stuart', 'stuart-delivery');
+                $note = esc_html__('There was a problem creating the delivery on Stuart', 'stuart-delivery');
                 $order->add_order_note($note);
                 return false;
             }
@@ -2019,11 +2019,13 @@ if (! class_exists('StuartShippingMethod')) {
             if ($this->getOption('delay', $context) !== false) {
                 $delay = (int) $this->getOption('delay', $context);
 
-                $one_day_minutes = 1440;
-
-                if ($delay >= $one_day_minutes) {
-                    $days = $delay / $one_day_minutes;
+                if ($this->getOption('debug_mode') == "yes") {
+                    $this->addLog('getDelay::delay', $delay);
                 }
+            }
+
+            if ($delay === 0) {
+                $delay = 1;
             }
 
             return $delay;
@@ -2034,9 +2036,14 @@ if (! class_exists('StuartShippingMethod')) {
             $delay = $this->getDelay();
             $startingPoint = $time === 'now' ? time() : $time;
             $firstTimeAvailable = $startingPoint + ($delay * 60);
-            $this->addLog('getNextDeliveryTime::firstTimeAvailable', $firstTimeAvailable);
+            if ($this->getOption('debug_mode') == "yes") {
+                $this->addLog('getNextDeliveryTime::firstTimeAvailable', $firstTimeAvailable);
+            }
             while (!$this->isDeliveryTime($firstTimeAvailable)) {
-                $firstTimeAvailable += $delay;
+                if ($this->getOption('debug_mode') == "yes") {
+                    $this->addLog('getNextDeliveryTime::firstTimeAvailable::Loop', $firstTimeAvailable);
+                }
+                $firstTimeAvailable += ($delay * 60);
             }
 
             return $firstTimeAvailable;

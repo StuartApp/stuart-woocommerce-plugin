@@ -1,10 +1,10 @@
 <?php
 /*
-    Plugin Name: Stuart Delivery For WooCommerce
+    Plugin Name: Stuart Delivery Integration for WooCommerce
     Plugin URI: http://plugins.stuart-apps.solutions/wordpress/
     Description: Integrate Stuart Delivery into your WooCommerce site
     Author: Jose Hervas Diaz <ji.hervas@stuart.com>
-    Version: 1.0.0
+    Version: 1.0.1
     License : GPL
     Text Domain: stuart-delivery
     Domain Path: /languages/
@@ -21,7 +21,7 @@ require_once(WP_CONTENT_DIR . '/plugins/stuart-woocommerce/interfaces/plugin-con
 
 class Stuart implements MainPluginController
 {
-    public $version = '1.0.0';
+    public $version = '1.0.1';
     public $settings;
     public $file = __FILE__;
     private static $instance;
@@ -34,38 +34,37 @@ class Stuart implements MainPluginController
         if ($this->version === $installedVersion) {
             return;
         }
-        if ($installedVersion === null) {
-            // 1st time installation
-            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-            // Setup DB
-            $charset_collate = '';
-            if (! empty($wpdb->charset)) {
-                $charset_collate .= "DEFAULT CHARACTER SET $wpdb->charset";
-            }
-            if (! empty($wpdb->collate)) {
-                $charset_collate .= " COLLATE $wpdb->collate";
-            }
-            $result_db_table_create_query = "CREATE TABLE IF NOT EXISTS ". $wpdb->prefix . "stuart_logs" . " (
-        log_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-        type varchar(255) NOT NULL DEFAULT '',
-        content text NOT NULL DEFAULT '',
-        date_created datetime DEFAULT NULL,
-        PRIMARY KEY (log_id)
-        ) ". $charset_collate .";";
-            dbDelta($result_db_table_create_query);
-            // Initialize all the plugin properties
-            $delivery = $this->initializeCustomDeliveryClass();
-            $fields = $delivery->getFields();
-            foreach ($fields as $field_name => $field_values) {
-                if (isset($field_values['default']) && !empty($field_values['default']) && !isset($new_settings[$field_name])) {
-                    $new_settings[$field_name] = $field_values['default'];
-                }
-            }
-            update_option('stuart_plugin_settings', $new_settings);
-            $settings = $new_settings;
-            // Update plugin version
-            update_option('stuart_plugin_version', $this->version);
+        // 1st time installation
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        // Setup DB
+        $charset_collate = '';
+        global $wpdb;
+        if (! empty($wpdb->charset)) {
+            $charset_collate .= "DEFAULT CHARACTER SET $wpdb->charset";
         }
+        if (! empty($wpdb->collate)) {
+            $charset_collate .= " COLLATE $wpdb->collate";
+        }
+        $result_db_table_create_query = "CREATE TABLE IF NOT EXISTS ". $wpdb->prefix . "stuart_logs" . " (
+    log_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    type varchar(255) NOT NULL DEFAULT '',
+    content text NOT NULL DEFAULT '',
+    date_created datetime DEFAULT NULL,
+    PRIMARY KEY (log_id)
+    ) ". $charset_collate .";";
+        dbDelta($result_db_table_create_query);
+        // Initialize all the plugin properties
+        $delivery = $this->initializeCustomDeliveryClass();
+        $fields = $delivery->getFields();
+        foreach ($fields as $field_name => $field_values) {
+            if (isset($field_values['default']) && !empty($field_values['default']) && !isset($new_settings[$field_name])) {
+                $new_settings[$field_name] = $field_values['default'];
+            }
+        }
+        update_option('stuart_plugin_settings', $new_settings);
+        $settings = $new_settings;
+        // Update plugin version
+        update_option('stuart_plugin_version', $this->version);
     }
 
     public function __construct()
