@@ -62,6 +62,7 @@ class Stuart implements MainPluginController
             }
         }
         update_option('stuart_plugin_settings', $new_settings);
+        update_option('woocommerce_StuartShippingMethod_settings', $new_settings);
         $settings = $new_settings;
         // Update plugin version
         update_option('stuart_plugin_version', $this->version);
