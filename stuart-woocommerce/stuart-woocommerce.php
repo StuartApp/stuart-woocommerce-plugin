@@ -21,7 +21,7 @@ require_once(plugin_dir_path(__FILE__) . '/interfaces/plugin-controller.php');
 
 class Stuart implements MainPluginController
 {
-    public $version = '1.0.1';
+    public $version = '1.0.2';
     public $settings;
     public $file = __FILE__;
     private static $instance;
