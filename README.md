@@ -2,7 +2,7 @@
 
 <img src="assets/header.png">
 
-Full documentation with user guides for this plugin can be found [here](https://stuart-team.atlassian.net/wiki/spaces/EN/pages/3455550103/WooCommerce+on-demand)
+Full documentation with user guides for this plugin can be found [here](https://community.stuart.engineering/t/woocommerce-plugin-setup-guide/1564)
 
 ### Changelog
 
