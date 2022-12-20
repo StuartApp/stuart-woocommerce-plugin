@@ -3,7 +3,7 @@
     Plugin Name: Stuart Delivery Integration for WooCommerce
     Plugin URI: http://plugins.stuart-apps.solutions/wordpress/
     Description: Integrate Stuart Delivery into your WooCommerce site
-    Author: Jose Hervas Diaz <ji.hervas@stuart.com>
+    Author: Jose Hervas Diaz <ji.hervas@stuart.com> (extended originally from Malttt's WooCommerce Plugin)
     Version: 1.0.1
     License : GPL
     Text Domain: stuart-delivery
