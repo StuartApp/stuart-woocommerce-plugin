@@ -2,7 +2,7 @@
 
 <img src="assets/header.png">
 
-Full documentation with user guides for this plugin can be found [here](https://community.stuart.engineering/t/stuart-woocommerce-plug-in/1564)
+IMPORTANT: This plugin is no longer maintained. Stuart is not looking to onboard new users to the Woocommerce plugin.
 
 ### Changelog
 
